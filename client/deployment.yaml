@@ -3,10 +3,10 @@ kind: Pod
 metadata:
   name: ubuntu-curl
 spec:
-  initcontainers:
+  initContainers:
     - name: init-curl
       image: curl:latest
-      commands: ["curl","http://springboot-service.springboot-app.svc.cluster.local:8083/datasetapis"]
+      command: ["sh", "-c", "until curl -s http://springboot-service.springboot-app.svc.cluster.local:8083/datasetapis; do echo 'Waiting for service...'; sleep 5; done"]
   containers:
     - name: ubuntu
       image: ubuntu:latest
