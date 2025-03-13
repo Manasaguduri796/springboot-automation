@@ -5,8 +5,8 @@ metadata:
 spec:
   initContainers:
     - name: init-curl
-      image: curl:latest
-      command: ["sh", "-c", "until curl -s http://springboot-service.springboot-app.svc.cluster.local:8083/datasetapis; do echo 'Waiting for service...'; sleep 5; done"]
+      image: curlimages/curl:latest
+      command: ["sh", "-c", "until curl -s http://springboot-service.springboot-app.svc.cluster.local; do echo 'Waiting for service...'; sleep 5; done"]
   containers:
     - name: ubuntu
       image: ubuntu:latest
