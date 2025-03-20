@@ -1,0 +1,21 @@
+#after packaging and installing the charts we should check the pods status using following command
+helm list
+kubectl get pods -A #(for all pods we use this command)
+kubectl get pod  postgres-7589d4d65d-96ndl -n postgres-db-helm # for only spefic pod we use this command)
+kubectl get pods springboot-app-7cd69cf5dc-s56rb -n springboot-app-helm
+
+# for checking service
+
+kubectl get services -A # for all sevice
+kubectl get services -n springboot-app-helm # for springboot
+
+# to check spring boot service we use minikube ip and our node port
+minikube ip # it will give ip address of the minikube  # we will check in postman
+
+# portforwarding
+
+kubectl port-forward service/springboot-service -n springboot-app-helm 8083:8083
+# by that we check locally
+
+
+

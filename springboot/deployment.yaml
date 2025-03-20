@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: springboot-app
-          image: manasaguduri796/springbootproject1:latest
+          image: manasaguduri796/springbootapis:latest
           envFrom:
             - configMapRef:
                 name: spring-config
