@@ -6,7 +6,7 @@ spec:
   initContainers:
     - name: init-curl
       image: curlimages/curl:latest
-      command: ["sh", "-c", "until curl -s http://springboot-service.springboot-app.svc.cluster.local; do echo 'Waiting for service...'; sleep 5; done"]
+      command: ["sh", "-c", "until curl -s http://springboot-service.springboot-app.svc.cluster.local:8083; do echo 'Waiting for service...'; sleep 5; done"]
   containers:
     - name: ubuntu
       image: ubuntu:latest

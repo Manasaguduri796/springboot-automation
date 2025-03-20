@@ -1,0 +1,62 @@
+namespace: springboot-app-helm
+app:
+  name: springboot-app
+  replicaCount: 1
+image:
+  repository: manasaguduri796/springbootapis
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  name: springboot-service
+  type: NodePort
+  port: 8083
+  targetPort: 8083
+  nodePort: 30009
+
+configmap:
+  name: spring-config
+  data:
+    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres.postgres-db-helm:5432/datasetapis
+    SPRING_DATASOURCE_USERNAME: postgres
+    SPRING_DATASOURCE_PASSWORD: password
+
+resources: {}
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+#postgresql
+
+
+postgres:
+  enabled: true
+  name: postgres
+  namespace: postgres-db-helm
+  image: postgres:17
+
+  service:
+    name: postgres
+    port: 5432
+    targetPort: 5432
+
+  configmap:
+    name: postgres-config
+    data:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: datasetapis
+
+  volumes:
+    name: postgres-pvc
+    storage: 3Gi
+
+
+
